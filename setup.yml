@@ -1,0 +1,21 @@
+---
+
+- name: Setup a CentOS env with some packages
+  hosts: localhost
+  become: yes
+
+  tasks:
+  - name: Install git
+    yum:
+      name: git
+
+  - name: Install yum-utils
+    yum:
+      name: yum-utils
+
+  - name: Run yum-config-manager command
+    command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+  - name: Include docker role
+    include_role:
+      name: docker    
